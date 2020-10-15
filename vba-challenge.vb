@@ -1,4 +1,4 @@
-Sub output():
+Sub main():
     
     Dim price_o As Double
     Dim price_c As Double

@@ -1,5 +1,5 @@
 Attribute VB_Name = "Module1"
-Sub output():
+Sub main():
     
     Dim price_o As Double
     Dim price_c As Double
@@ -29,7 +29,7 @@ Sub output():
                 Call divZero(ws, rowCount, yrChange, price_o)
                 ws.Range("L" & rowCount).Value = vol
                 
-                Call colorChange(rowCount, ws)
+                Call cellFormats(rowCount, ws)
                 
                 rowCount = rowCount + 1
                 vol = 0
@@ -44,7 +44,7 @@ Sub output():
         
     End Sub
     
-    Sub colorChange(cnt As Integer, ws As Worksheet):
+    Sub cellFormats(cnt As Integer, ws As Worksheet):
         If ws.Range("J" & cnt).Value < 0 Then
             
             ws.Range("J" & cnt).Interior.ColorIndex = 3
@@ -54,7 +54,7 @@ Sub output():
             ws.Range("J" & cnt).Interior.ColorIndex = 4
             
         End If
-        
+        ws.Cells.EntireColumn.AutoFit
         ws.Range("I" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
         ws.Range("J" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
         ws.Range("K" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
@@ -69,9 +69,11 @@ Sub output():
             
         Else
             
-            ws.Range("K" & rowCount).Value = yrChange / open_price
+            ws.Range("K" & rowCount).Value = Format(yrChange / open_price, "Percent")
             
         End If
     End Sub
     
+
+
 
