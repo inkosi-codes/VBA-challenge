@@ -1,10 +1,9 @@
-Attribute VB_Name = "Module1"
 Sub main():
     
     Dim price_o As Double
     Dim price_c As Double
     Dim yrChange As Double
-    Dim ticker As String
+    Dim Ticker As String
     Dim rowCount As Integer
     Dim vol As Double
     Dim lastRow As Long
@@ -15,16 +14,21 @@ Sub main():
         lastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
         price_o = ws.Cells(2, 3).Value
         
+        ws.Cells(1, 9).Value = "Ticker"
+        ws.Cells(1, 10).Value = "Yearly Change"
+        ws.Cells(1, 11).Value = "Percent Change"
+        ws.Cells(1, 12).Value = "Total Stock Volume"
+        
         For i = 2 To lastRow
             
             If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
                 
                 price_c = ws.Cells(i, 6).Value
-                ticker = ws.Cells(i, 1).Value
+                Ticker = ws.Cells(i, 1).Value
                 vol = vol + ws.Cells(i, 7).Value
                 yrChange = price_c - price_o
                 
-                ws.Range("I" & rowCount).Value = ticker
+                ws.Range("I" & rowCount).Value = Ticker
                 ws.Range("J" & rowCount).Value = yrChange
                 Call divZero(ws, rowCount, yrChange, price_o)
                 ws.Range("L" & rowCount).Value = vol
@@ -39,9 +43,10 @@ Sub main():
                 vol = vol + ws.Cells(i, 7).Value
                 
             End If
+    
             Next i
+            Call greatCal(ws)
         Next
-        
     End Sub
     
     Sub cellFormats(cnt As Integer, ws As Worksheet):
@@ -54,11 +59,9 @@ Sub main():
             ws.Range("J" & cnt).Interior.ColorIndex = 4
             
         End If
-        ws.Cells.EntireColumn.AutoFit
-        ws.Range("I" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
-        ws.Range("J" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
-        ws.Range("K" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
-        ws.Range("L" & cnt).BorderAround LineStyle:=xlContinuous, Weight:=xlThin
+        ws.Range("I:I", "L:L").BorderAround LineStyle:=xlContinuous, Weight:=xlThin
+        ws.Range("I:I", "L:L").EntireColumn.AutoFit
+        ws.Range("I1:L1").Interior.ColorIndex = 36
     End Sub
     
     Sub divZero(ws As Worksheet, rowCount As Integer, yrChange As Double, open_price As Double)
@@ -74,6 +77,17 @@ Sub main():
         End If
     End Sub
     
-
-
-
+    Sub greatCal(ws As Worksheet):
+    
+    ws.Cells(2, 15).Value = "Greatest % increase"
+    ws.Cells(3, 15).Value = "Greatest % decrease"
+    ws.Cells(4, 15).Value = "Greatest total volume"
+    
+    ws.Cells(2, 17).Value = Format(WorksheetFunction.Max(ws.Range("K:K")), "Percent")
+    ws.Cells(3, 17).Value = Format(WorksheetFunction.Min(ws.Range("K:K")), "Percent")
+    ws.Cells(4, 17).Value = WorksheetFunction.Max(ws.Range("L:L"))
+    
+    ws.Range("O:O", "Q:Q").EntireColumn.AutoFit
+    
+    End Sub
+    
