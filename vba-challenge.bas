@@ -89,6 +89,8 @@ Sub greatCal(ws     As Worksheet, lastRow As Long):
     ws.Cells(2, 15).Value = "Greatest % increase"
     ws.Cells(3, 15).Value = "Greatest % decrease"
     ws.Cells(4, 15).Value = "Greatest total volume"
+    ws.Cells(1, 16).Value = "Ticker"
+    ws.Cells(1, 17).Value = "Value"
     
     greatest_inc = WorksheetFunction.Max(ws.Range("K:K"))
     greatest_dec = WorksheetFunction.Min(ws.Range("K:K"))

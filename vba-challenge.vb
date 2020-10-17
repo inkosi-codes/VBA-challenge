@@ -64,7 +64,7 @@ Sub cellFormats(cnt As Integer, ws As Worksheet):
     ws.Range("I1:L1").Interior.ColorIndex = 36
 End Sub
 
-Sub divZero(ws As Worksheet, rowCount As Integer, yrChange As Double, open_price As Double)
+Sub divZero(ws      As Worksheet, rowCount As Integer, yrChange As Double, open_price As Double)
     
     If open_price = 0 Then
         
@@ -89,6 +89,8 @@ Sub greatCal(ws     As Worksheet, lastRow As Long):
     ws.Cells(2, 15).Value = "Greatest % increase"
     ws.Cells(3, 15).Value = "Greatest % decrease"
     ws.Cells(4, 15).Value = "Greatest total volume"
+    ws.Cells(1, 16).Value = "Ticker"
+    ws.Cells(1, 17).Value = "Value"
     
     greatest_inc = WorksheetFunction.Max(ws.Range("K:K"))
     greatest_dec = WorksheetFunction.Min(ws.Range("K:K"))
