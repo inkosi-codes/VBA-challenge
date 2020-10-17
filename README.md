@@ -3,6 +3,7 @@ Using VBA code to traverse multiple worksheets of an excel workbook. Each worksh
 
 ## Background
 This task will be using VBA scripting to analyze real stock market data. Using VBA a yearly stock performance summary will be generated focused on yearly change, percent change, and total volume. Due to the size of the dataset screenshots of the results have been used to show concept and completed work after the script has ran. 
+
 **Key points of focus include:**
 * Greatest Percentage Increase
 * Greatest Percentage Decrease
